@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
      
      File       : numeric
      */
-    
+    //Algo 1
     int sum_vec_element = std::accumulate(begin(vec),
                                           end(vec),
                                           0);
@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
      (second itr --> large element)
      
      */
-    
+    //Algo 2
     auto [min,max]=std::minmax_element(begin(vec),end(vec));
     
     std::cout<<std::endl<<"Min element in vector "<< *min;
@@ -94,14 +94,14 @@ int main(int argc, const char * argv[]) {
     for(auto val:v2){std::cout<<" "<<val;}
     
     std::vector<int> vec_union{},vec_intersection{},vec_difference{},vec_symmetric_difference{};
-    
+    //Algo 3
     std::set_union(begin(v1),end(v1),
                    begin(v2),end(v2),
                    std::back_inserter(vec_union));
     
     std::cout<<std::endl<<" vec_union values "<<std::endl;
     for(auto val:vec_union){std::cout<<" "<<val;}
-    
+    //Algo 4
     std::set_intersection(begin(v1),end(v1),
                         begin(v2),end(v2),
                         std::back_inserter(vec_intersection));
@@ -109,14 +109,14 @@ int main(int argc, const char * argv[]) {
     for(auto val:vec_intersection){std::cout<<" "<<val;}
     
     
-    
+    //Algo 5
     std::set_difference(begin(v1),end(v1),
                         begin(v2),end(v2),
                         std::back_inserter(vec_difference));
     
     std::cout<<std::endl<<" vec_difference values "<<std::endl;
     for(auto val:vec_difference){std::cout<<" "<<val;}
-    
+    //Algo 6
     std::set_symmetric_difference(begin(v1),end(v1),
                                  begin(v2),end(v2),
                                  std::back_inserter(vec_symmetric_difference));
@@ -126,10 +126,88 @@ int main(int argc, const char * argv[]) {
     
     std::cout<<std::endl;
     
+    std::cout<<std::endl<<"---------------------------------------------";
+    
+    /*
+       type : sorting operation
+       sort(range of elements) : sort in ascending order
+       sort(range of elements,std::greater<datatype>()) : sort in decending order
+       is_sorted(range of elements) : true if the elements in the range are sorted in non-descending order, false otherwise
+    
+     */
+    
+    std::vector<int> vec_unsorted_int{30,20,50,10,3};
     
     
+    std::cout<<std::endl<<" Before Sort # Printing values of vector "<<std::endl;
+    for(auto val:vec_unsorted_int){std::cout<<" "<<val;}
+    std::cout<<std::endl<<" Is vector sorted "<<std::is_sorted(begin(vec_unsorted_int),end(vec_unsorted_int)); //Algo 7
+    std::cout<<std::endl<<"---------------------------------------------";
     
     
+    //Algo 8
+    std::sort(begin(vec_unsorted_int),end(vec_unsorted_int),std::greater<int>());
+    std::cout<<std::endl<<" After Sorting in descending order # Printing values of vector "<<std::endl;
+    for(auto val:vec_unsorted_int){std::cout<<" "<<val;}
+    std::cout<<std::endl<<" Is vector sorted "<<std::is_sorted(begin(vec_unsorted_int),end(vec_unsorted_int));
+    std::cout<<std::endl<<"---------------------------------------------";
+    
+    
+    std::sort(begin(vec_unsorted_int),end(vec_unsorted_int));
+    std::cout<<std::endl<<" After Sort # Printing values of vector "<<std::endl;
+    for(auto val:vec_unsorted_int){std::cout<<" "<<val;}
+    std::cout<<std::endl<<" Is vector sorted "<<std::is_sorted(begin(vec_unsorted_int),end(vec_unsorted_int));
+    std::cout<<std::endl<<"---------------------------------------------";
+    
+    
+    /*
+                                Binary search vs find
+     
+     
+     Binary_search(range of elements) :true if an element equivalent to value is found, false otherwise.
+     std::find() is pretty straight forward.
+             O(n) iterator increments and O(n) comparisons.
+             Also it doesn't matter wether the input data is sorted or not.
+     
+     std::binary_search() you need to consider multiple factors:
+
+             It only works on sorted data. You need to take the cost of sorting into account.
+             The number of comparisons is always O(log n).
+             If the iterator does not satisfy LegacyRandomAccessIterator the number of iterator increments is O(n),
+             it will be logarithmic when they do satisfy this requirement.
+     
+     usages:
+     
+             when you operate on un-sorted data or need the location of the item you searched for you must use std::find()
+             when your data is already sorted or needs to be sorted anyway and you simply want to check if an element
+             is present or not, use std::binary_search()
+             If you want to search containers like std::set, std::map or their unordered counterparts also consider their builtin methods like std::set::find
+     
+     */
+    
+    
+    //Algo 9
+    if(std::binary_search(begin(vec_unsorted_int),end(vec_unsorted_int),30))
+    {
+        std::cout<<std::endl<<"element avaible # searched using binary_search()";
+    }
+    else
+    {
+        std::cout<<std::endl<<"element not avaible # searched using binary_search()";
+    }
+    
+    
+    /*
+     //Algo 10 //https://en.cppreference.com/w/cpp/algorithm/reverse
+     //Algo 11 //https://en.cppreference.com/w/cpp/algorithm/unique
+     //Algo 12 //https://en.cppreference.com/w/cpp/algorithm/remove
+     //Algo 13 //https://en.cppreference.com/w/cpp/algorithm/fill
+     //Algo 14 //https://en.cppreference.com/w/cpp/algorithm/transform
+     //Algo 15 //https://en.cppreference.com/w/cpp/algorithm/copy
+     //Algo 16 //https://en.cppreference.com/w/cpp/algorithm/mismatch
+     //Algo 17 //https://en.cppreference.com/w/cpp/algorithm/find
+     
+     */
     
     
     
